@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import './style.css';
+import emailjs from 'emailjs-com';
 
 function App() {
 
@@ -8,13 +9,50 @@ function App() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const form = useRef();
+
+  const isEmail = () => {
+    let mail = document.getElementById('wrong-email');
+    let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (email.match(regex)) {
+      mail.style.display = 'none';
+      return true;
+    } else {
+      mail.style.display = 'block';
+      return false;
+    }
   }
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name && isEmail() && message) {
+      
+      
+      emailjs.sendForm('service_cltpcqk', 'template_vtd437k', form.current, 'user_yomLsOiO2GIFfKLrISFvC')
+      .then((res) => {
+        setName();
+        setSurname();
+        setPhone();
+        setEmail();
+        setMessage();
+        console.log('SUCCESS!', res.status, res.text);
+      }, (error) => {
+        document.querySelector('.form-message').innerHTML = "Une erreur s'est produite, veuillez réessayer";
+        console.log('FAILED...', error);
+      });
+    } else {
+      document.querySelector('.form-message').innerHTML = "Veuillez remplir les champs obligatoires *";
+      console.log('pas bon');
+    };
+  }
+
+
+
 	return (
-		<form className="form-container" autoComplete="off">
+		<form ref={form} className="form-container" autoComplete="off" onSubmit={handleSubmit}>
 			<h1>Contactez-nous</h1>
 			<div className="form-content">
 				<input 
@@ -60,7 +98,7 @@ function App() {
           onChange={(e) => setMessage(e.target.value)}>
         </textarea>
 			</div>
-			<input className="submit" type="submit" value="Valider" onClick={handleSubmit} />
+			<input className="submit" type="submit" value="Valider" />
 			<div className="form-message"></div>
 		</form>
 	);

@@ -1,6 +1,6 @@
 @font-face {
-   font-family: roboto;
-   src: url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+   font-family: 'roboto';
+   src: url(./assets/Roboto-Regular.ttf);
 }
 
 * {
@@ -28,8 +28,8 @@ h1 {
 .form-container {
    border: 2px solid rgba(12, 21, 51);
    border-radius: 25px;
-   backdrop-filter: blur(5px);
-   background: rgba(12, 21, 51, 0.466);
+   backdrop-filter: blur(6px);
+   background: rgba(12, 21, 51, 0.61);
 }
 
 .form-content, .email-content {
@@ -44,7 +44,7 @@ h1 {
 }
 
 #wrong-email {
-   /* visibility: hidden; */
+   display: none;
    position: absolute;
    top: -3px;
    right: 100px;
@@ -94,4 +94,6 @@ textarea {
 
 .form-message {
    height: 80px;
+   color: red;
+   font-size: 1.4rem;
 }
