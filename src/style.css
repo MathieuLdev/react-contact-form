@@ -66,6 +66,15 @@ input, textarea {
    color: whitesmoke;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    color: whitesmoke;
+    background: whitesmoke;
+}
+
 input[type='submit'] {
    border: 2px solid whitesmoke;
    border-radius: 0px;
