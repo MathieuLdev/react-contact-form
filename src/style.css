@@ -18,10 +18,10 @@ body {
    justify-content: center;
    align-items: center;
    background: url(./assets/laptop.jpg) center/cover fixed;
+   color: whitesmoke;
 }
 
 h1 {
-   color: whitesmoke;
    margin: 15px auto;
 }
 
@@ -50,8 +50,18 @@ h1 {
    right: 100px;
    font-size: 1.2rem;
    font-weight: 400;
-   color: red;
 }
+
+@keyframes dongle {
+   0% { right: 100px }
+   10% { right: 110px }
+   30% { right: 90px }
+   50% { right: 110px }
+   70% { right: 90px }
+   90% { right: 110px }
+}
+
+
 
 input, textarea {
    margin: 10px auto;
@@ -64,15 +74,6 @@ input, textarea {
    font-weight: 600;
    background: none;
    color: whitesmoke;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-    color: whitesmoke;
-    background: whitesmoke;
 }
 
 input[type='submit'] {
@@ -102,7 +103,10 @@ textarea {
 }
 
 .form-message {
-   height: 80px;
-   color: red;
+   display: flex;
+   margin: 5px auto 0px;
+   justify-content: center;
+   width: 480px;
+   height: 70px;
    font-size: 1.4rem;
 }

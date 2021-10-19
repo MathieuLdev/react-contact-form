@@ -20,6 +20,10 @@ function App() {
       return true;
     } else {
       mail.style.display = 'block';
+      mail.style.animation = "dongle 1s"
+      setTimeout(() => {
+        mail.style.animation = "none"
+      }, 1000);
       return false;
     }
   }
@@ -30,29 +34,30 @@ function App() {
 
     if (name && isEmail() && message) {
       
-      
       emailjs.sendForm('service_cltpcqk', 'template_vtd437k', form.current, 'user_yomLsOiO2GIFfKLrISFvC')
       .then((res) => {
-        setName();
-        setSurname();
-        setPhone();
-        setEmail();
-        setMessage();
-        console.log('SUCCESS!', res.status, res.text);
+        setName("");
+        setSurname("");
+        setPhone("");
+        setEmail("");
+        setMessage("");
+        document.querySelector('.form-message').innerHTML = "Message envoyé ! Nous vous recontacterons dès que possible."
+        setTimeout(() => {
+          document.querySelector('.form-message').innerHTML = ""
+        }, 5000);
       }, (error) => {
         document.querySelector('.form-message').innerHTML = "Une erreur s'est produite, veuillez réessayer";
         console.log('FAILED...', error);
       });
     } else {
       document.querySelector('.form-message').innerHTML = "Veuillez remplir les champs obligatoires *";
-      console.log('pas bon');
     };
   }
 
 
 
 	return (
-		<form ref={form} className="form-container" autoComplete="off" onSubmit={handleSubmit}>
+		<form ref={form} className="form-container" noValidate="novalidate" onSubmit={handleSubmit}>
 			<h1>Contactez-nous</h1>
 			<div className="form-content">
 				<input 
@@ -61,6 +66,7 @@ function App() {
           id="name" 
           placeholder="Nom *"
           value={name}
+          autoComplete="chrome-off"
           onChange={(e) => setName(e.target.value)}
         />
 				<input 
@@ -77,6 +83,7 @@ function App() {
           id="phone" 
           placeholder="Téléphone" 
           value={phone}
+          autoComplete="chrome-off"
           onChange={(e) => setPhone(e.target.value)}
         />
 				<div className="email-content">
@@ -85,8 +92,9 @@ function App() {
             type="email" 
             name="email" 
             id="email" 
-            placeholder="email" 
+            placeholder="email *" 
             value={email}
+            autoComplete="chrome-off"
             onChange={(e) => setEmail(e.target.value)}
           />
 				</div>
@@ -95,6 +103,7 @@ function App() {
           id="message" 
           placeholder="Message *"
           value={message}
+          autoComplete="chrome-off"
           onChange={(e) => setMessage(e.target.value)}>
         </textarea>
 			</div>
